@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +11,7 @@ import org.springframework.data.domain.Page;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.example.demo.entity.Student;
 import com.example.demo.repository.StudentRepository;
@@ -20,55 +20,58 @@ import com.example.demo.repository.StudentRepository;
 public class StudentService {
  
 	@Autowired
-	StudentRepository repo;
-	
-	public Student saveStudent(Student student) {
-		return repo.save(student);
+	StudentRepository studentRepository;
+//	StudentPagableRepository studentPagableRepository;
+
+	public Student save(Student student) {
+		return studentRepository.save(student);
 	}
 	
 	
-	public List<Student> saveStudents(List<Student>student) {
-		return repo.saveAll(student);
+	public List<Student> saveAll(List<Student>student) {
+		return studentRepository.saveAll(student);
 	}
 	
 	
-	public List<Student>getAllStudents(){
+	public List<Student> findAll(){
 		
-		return repo.findAll(); 
+		return studentRepository.findAll();
     }
 	
 	
-	public Student getStudentById(int id) {
-		return repo.findById(id).orElse(null);
+	public Student findById(int id) {
+		return studentRepository.findById(id).orElse(null);
 	}
 	
 	
 	public Page<Student> getStudentPagination(int page, int pagesize)
 	{
-		Pageable sortedByName = (Pageable) PageRequest.of(0, 3);
-		return repo.findAll(sortedByName);
+		Pageable sortedByName = PageRequest.of(0, 3);
+		return studentRepository.findAll(sortedByName);
 	}
 	
-	public String deleteStudent(int id) {
-		repo.deleteById(id);
+	public String deleteById(int id) {
+		studentRepository.deleteById(id);
 		return "product removed || "+id; 
 	}
-	
-	public Student updateStudent(int id, Student newStudentData) {
+
+	// not needed
+	public Student update(int id, Student pStudent) {
 	    // Find the existing student by ID
-	    Optional<Student> optionalExistingStudent = repo.findById(id);
-	    
+	    Optional<Student> optionalExistingStudent = studentRepository.findById(id);
+
+
 	    // Check if the student exists in the database
 	    if (optionalExistingStudent.isPresent()) {
 	        Student existingStudent = optionalExistingStudent.get();
-	        
+
 	        // Update the existing student's data with the new data
-	        existingStudent.setStudentName(newStudentData.getStudentName());
-	        existingStudent.setStudentIntake(newStudentData.getStudentIntake());
-	        existingStudent.setStudentSection(newStudentData.getStudentSection());
-	        
+	        existingStudent.setStudentName(pStudent.getStudentName());
+	        existingStudent.setStudentIntake(pStudent.getStudentIntake());
+	        existingStudent.setStudentSection(pStudent.getStudentSection());
+
 	        // Save the updated student record in the database
-	        return repo.save(existingStudent);
+	        return studentRepository.save(existingStudent); ////////////save alada
 	    } else {
 	        // Handle the case where the student with the given ID does not exist
 	        // You might throw an exception, return null, or handle it in some other way
@@ -76,5 +79,5 @@ public class StudentService {
 	    }
 	}
 
-	
+
 }

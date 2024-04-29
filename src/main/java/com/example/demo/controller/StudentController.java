@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.Student;
 import com.example.demo.service.StudentService;
-import org.springframework.data.domain.Page; // Correct import
 
 @RestController
 public class StudentController {
@@ -22,25 +21,25 @@ public class StudentController {
     
     @PostMapping("/AddStudent")
     public Student addStudent(@RequestBody Student student) {
-        return servi.saveStudent(student);
+        return servi.save(student);
     }
     
     
     @PostMapping("/AddStudents")
     public List<Student> addStudents(@RequestBody List<Student>student) {
-        return servi.saveStudents(student);
+        return servi.saveAll(student);
     }
     
     
     @GetMapping("/FindStudents")
     public List<Student>FindAllStudents(){
-        return servi.getAllStudents();
+        return servi.findAll();
     }
     
     
     @GetMapping("/FindStudent/{id}")
     public Student FindStudentById(@PathVariable  int id) {
-        return servi.getStudentById(id);
+        return servi.findById(id);
     }
     
 //    
@@ -54,7 +53,7 @@ public class StudentController {
 //    
     @DeleteMapping("/DeleteStudent/{id}")
     public String DeleteStudent(@PathVariable int id) {
-        servi.deleteStudent(id);
+        servi.deleteById(id);
         return "product removed || "+id; 
     }
     
@@ -62,7 +61,7 @@ public class StudentController {
     @PutMapping("/UpdateStudent/{id}")
     public Student UpdateStudent(@PathVariable int id, @RequestBody Student student)
     {
-        return servi.updateStudent(id,student);
+        return servi.update(id,student);
     }
     
 }
