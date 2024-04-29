@@ -43,15 +43,15 @@ public class StudentController {
         return servi.getStudentById(id);
     }
     
-    
-    @GetMapping("/FindStudentsPagination/{page}/{pagesize}")
-    public Page<Student> FindStudentPagination(@PathVariable int page,@PathVariable int pagesize)
-    {
-        return servi.getStudentPagination(page,pagesize);
-    
-    }
-    
-    
+//    
+//    @GetMapping("/FindStudentsPagination/{page}/{pagesize}")
+//    public Page<Student> FindStudentPagination(@PathVariable int page,@PathVariable int pagesize)
+//    {
+//        return servi.getStudentPagination(page,pagesize);
+//    
+//    }
+//    
+//    
     @DeleteMapping("/DeleteStudent/{id}")
     public String DeleteStudent(@PathVariable int id) {
         servi.deleteStudent(id);
