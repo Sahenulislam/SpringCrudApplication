@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.Student;
 import com.example.demo.service.StudentService;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class StudentController {
@@ -79,5 +80,12 @@ public class StudentController {
             return studentService.findAllBySectionPaging(section,page,pagesize);
 
     }
-    
+
+    @GetMapping("/FindAnwarCloudeNodes")
+    public String FindAnwarCloudeNodes() {
+        String uri = "http://172.17.17.14:8080/goapi/anwarcloud/nodes";
+        RestTemplate restTemplate = new RestTemplate();
+        String result = restTemplate.getForObject(uri, String.class);
+        return result;
+    }
 }
