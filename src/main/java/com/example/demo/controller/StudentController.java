@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,43 +18,41 @@ import com.example.demo.service.StudentService;
 public class StudentController {
     
     @Autowired
-    StudentService servi;
+    StudentService studentService;
     
     @PostMapping("/AddStudent")
     public Student addStudent(@RequestBody Student student) {
-        return servi.save(student);
+        return studentService.save(student);
     }
     
     
     @PostMapping("/AddStudents")
     public List<Student> addStudents(@RequestBody List<Student>student) {
-        return servi.saveAll(student);
+        return studentService.saveAll(student);
     }
     
     
     @GetMapping("/FindStudents")
     public List<Student>FindAllStudents(){
-        return servi.findAll();
+        return studentService.findAll();
     }
     
     
     @GetMapping("/FindStudent/{id}")
     public Student FindStudentById(@PathVariable  int id) {
-        return servi.findById(id);
+        return studentService.findById(id);
     }
     
-//    
-//    @GetMapping("/FindStudentsPagination/{page}/{pagesize}")
-//    public Page<Student> FindStudentPagination(@PathVariable int page,@PathVariable int pagesize)
-//    {
-//        return servi.getStudentPagination(page,pagesize);
-//    
-//    }
-//    
-//    
+
+    @GetMapping("/FindStudentsPagination/{page}/{pagesize}")
+    public Page<Student> FindStudentPagination(@PathVariable int page, @PathVariable int pagesize)
+    {
+        return studentService.getStudentPagination(page,pagesize);
+    }
+
     @DeleteMapping("/DeleteStudent/{id}")
     public String DeleteStudent(@PathVariable int id) {
-        servi.deleteById(id);
+        studentService.deleteById(id);
         return "product removed || "+id; 
     }
     
@@ -61,7 +60,24 @@ public class StudentController {
     @PutMapping("/UpdateStudent/{id}")
     public Student UpdateStudent(@PathVariable int id, @RequestBody Student student)
     {
-        return servi.update(id,student);
+        return studentService.update(id,student);
+    }
+
+
+    @GetMapping("/FindAllStudentBySection/{Section}")
+    public  List<Student> findAllStudentBySection(@PathVariable String Section)
+    {
+        return studentService.findAllBySection(Section);
+    }
+
+
+    @GetMapping("/FindAllStudentBySection/{section}/{page}/{pagesize}")
+    public  Page<Student> findAllStudentBySectionPaging(@PathVariable String section,
+                                                        @PathVariable int page,
+                                                        @PathVariable int pagesize)
+    {
+            return studentService.findAllBySectionPaging(section,page,pagesize);
+
     }
     
 }

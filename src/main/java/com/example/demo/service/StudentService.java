@@ -42,11 +42,19 @@ public class StudentService {
 	public Student findById(int id) {
 		return studentRepository.findById(id).orElse(null);
 	}
-	
-	
+
+
+	public List<Student> findAllBySection(String Section){
+		return studentRepository.findAllBySection(Section);
+	}
+
+	public Page<Student> findAllBySectionPaging(String section, int page, int pagesize) {
+		return studentRepository.findAllBySection(section,PageRequest.of(page,pagesize));
+	}
+
 	public Page<Student> getStudentPagination(int page, int pagesize)
 	{
-		Pageable sortedByName = PageRequest.of(0, 3);
+		Pageable sortedByName = PageRequest.of(page,pagesize);
 		return studentRepository.findAll(sortedByName);
 	}
 	

@@ -13,13 +13,10 @@ import jakarta.persistence.Id;
 public class Student {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int StudentId;
-	@Column(name="student_name")
-	private String StudentName;
-	@Column(name="student_intake")
-	private String StudentIntake;
-	@Column(name="student_section")
-	private String StudentSection;
+	private int id;
+	private String name;
+	private String intake;
+	private String section;
 	
 	
 	public Student() {	
@@ -28,56 +25,56 @@ public class Student {
 	
 	public Student(int studentId, String studentName, String studentIntake, String studentSection) {
 		super();
-		StudentId = studentId;
-		StudentName = studentName;
-		StudentIntake = studentIntake;
-		StudentSection = studentSection;
+		id = studentId;
+		name = studentName;
+		intake = studentIntake;
+		section = studentSection;
 	}
 	
 	
 	@Override
 	public String toString() {
-		return "Student [StudentId=" + StudentId + ", StudentName=" + StudentName + ", StudentIntake=" + StudentIntake
-				+ ", StudentSection=" + StudentSection + "]";
+		return "Student [StudentId=" + id + ", StudentName=" + name + ", StudentIntake=" + intake
+				+ ", StudentSection=" + section + "]";
 	}
 	
 	
 	public int getStudentId() {
-		return StudentId;
+		return id;
 	}
 	
 	
 	public void setStudentId(int studentId) {
-		StudentId = studentId;
+		id = studentId;
 	}
 	
 	
 	public String getStudentName() {
-		return StudentName;
+		return name;
 	}
 	
 	
 	public void setStudentName(String studentName) {
-		StudentName = studentName;
+		name = studentName;
 	}
 	
 	
 	public String getStudentIntake() {
-		return StudentIntake;
+		return intake;
 	}
 	
 	
 	public void setStudentIntake(String studentIntake) {
-		StudentIntake = studentIntake;
+		intake = studentIntake;
 	}
 	
 	
 	public String getStudentSection() {
-		return StudentSection;
+		return section;
 	}
 	
 	
 	public void setStudentSection(String studentSection) {
-		StudentSection = studentSection;
+		section = studentSection;
 	}
 }
