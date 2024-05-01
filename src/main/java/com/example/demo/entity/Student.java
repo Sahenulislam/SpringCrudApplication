@@ -14,8 +14,11 @@ public class Student {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	@Column(name = "name")
 	private String name;
+	@Column(name = "intake")
 	private String intake;
+	@Column(name = "section")
 	private String section;
 	
 	
@@ -34,8 +37,8 @@ public class Student {
 	
 	@Override
 	public String toString() {
-		return "Student [StudentId=" + id + ", StudentName=" + name + ", StudentIntake=" + intake
-				+ ", StudentSection=" + section + "]";
+		return "Student [id=" + id + ", name=" + name + ", intake=" + intake
+				+ ", section =" + section + "]";
 	}
 	
 	

@@ -8,7 +8,7 @@ import com.example.demo.entity.Student;
 
 import java.util.List;
 
-public interface StudentRepository extends JpaRepository<Student, Integer> {
+public interface StudentRepository extends JpaRepository<Student , Integer> {
 
 
    List<Student> findAllBySection(String section);

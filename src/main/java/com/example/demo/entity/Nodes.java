@@ -12,11 +12,12 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Nodes {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
-    private String ip ;
-    private String name;
-    private String storage;
-    private String ram;
-    private String cpu;
+    private int studentId;
+    private String studentName;
+    private String studentIntake;
+    private String studentSection;
+    
+    
+    
 
 }
