@@ -1,10 +1,12 @@
-package com.example.demo.service;
+package com.example.demo.student;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 
+import com.example.demo.node.NodesRepository;
+import com.example.demo.student.objects.Student;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
 
@@ -19,12 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.demo.entity.Nodes;
-import com.example.demo.entity.Student;
-import com.example.demo.repository.NodesRepository;
-import com.example.demo.repository.StudentRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
+import com.example.demo.node.Nodes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
@@ -62,7 +59,7 @@ public class StudentService {
 	}
 	
 	
-	public Student findById(int id) {
+	public Student findById(Long id) {
 		return studentRepository.findById(id).orElse(null);
 	}
 
@@ -81,13 +78,13 @@ public class StudentService {
 		return studentRepository.findAll(sortedByName);
 	}
 	
-	public String deleteById(int id) {
+	public String deleteById(Long id) {
 		studentRepository.deleteById(id);
 		return "product removed || "+id; 
 	}
 
 	// not needed
-	public Student update(int id, Student pStudent) {
+	public Student update(Long id, Student pStudent) {
 	    // Find the existing student by ID
 	    Optional<Student> optionalExistingStudent = studentRepository.findById(id);
 
@@ -97,9 +94,9 @@ public class StudentService {
 	        Student existingStudent = optionalExistingStudent.get();
 
 	        // Update the existing student's data with the new data
-	        existingStudent.setStudentName(pStudent.getStudentName());
-	        existingStudent.setStudentIntake(pStudent.getStudentIntake());
-	        existingStudent.setStudentSection(pStudent.getStudentSection());
+	        existingStudent.setName(pStudent.getName());
+	        existingStudent.setIntake(pStudent.getIntake());
+	        existingStudent.setSection(pStudent.getSection());
 
 	        // Save the updated student record in the database
 	        return studentRepository.save(existingStudent); ////////////save alada
@@ -147,21 +144,12 @@ public class StudentService {
 	}*/
 
 
-	public Object callThirdPartyApi(){
-		String uri = "http://172.17.17.14:8080/goapi/anwarcloud/nodes";
+	public Object callThirdPartyApi(Integer postId){
+		String uri = "https://jsonplaceholder.org/posts/1";
 		RestTemplate restTemplate = new RestTemplate();
 		String jsonResponse = restTemplate.getForObject(uri, String.class);
+		System.out.println("jsonResponse = " + jsonResponse);
 
-		ObjectMapper objectMapper = new ObjectMapper();
-		try {
-			Nodes myEntity = objectMapper.readValue(jsonResponse, Nodes.class);
-
-			// Save the entity to the database
-			nodesRepository.save(myEntity);
-		} catch (IOException e) {
-			// Handle exception
-			e.printStackTrace();
-		}
 		return jsonResponse;
 	}
 

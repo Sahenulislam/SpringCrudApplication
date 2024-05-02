@@ -1,6 +1,4 @@
-package com.example.demo.responses;
-
-import com.example.demo.entity.Nodes;
+package com.example.demo.node;
 
 import java.util.List;
 

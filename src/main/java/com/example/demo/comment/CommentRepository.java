@@ -1,2 +1,6 @@
-package com.example.demo.comment;public interface CommentController {
+package com.example.demo.comment;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CommentRepository extends JpaRepository<Comment, Long> {
 }

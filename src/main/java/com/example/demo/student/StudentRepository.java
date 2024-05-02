@@ -1,14 +1,13 @@
-package com.example.demo.repository;
+package com.example.demo.student;
 
+import com.example.demo.student.objects.Student;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.demo.entity.Student;
 
 import java.util.List;
 
-public interface StudentRepository extends JpaRepository<Student , Integer> {
+public interface StudentRepository extends JpaRepository<Student, Long> {
 
 
    List<Student> findAllBySection(String section);

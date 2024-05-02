@@ -1,5 +1,7 @@
-package com.example.demo.entity;
+package com.example.demo.student.objects;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.relational.core.mapping.Table;
 
 import jakarta.persistence.Column;
@@ -9,11 +11,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-@Table(name="student")
+@Getter
+@Setter
 public class Student {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	@Column(name = "name")
 	private String name;
 	@Column(name = "intake")
@@ -21,63 +24,5 @@ public class Student {
 	@Column(name = "section")
 	private String section;
 	
-	
-	public Student() {	
-	}
-	
-	
-	public Student(int studentId, String studentName, String studentIntake, String studentSection) {
-		super();
-		id = studentId;
-		name = studentName;
-		intake = studentIntake;
-		section = studentSection;
-	}
-	
-	
-	@Override
-	public String toString() {
-		return "Student [id=" + id + ", name=" + name + ", intake=" + intake
-				+ ", section =" + section + "]";
-	}
-	
-	
-	public int getStudentId() {
-		return id;
-	}
-	
-	
-	public void setStudentId(int studentId) {
-		id = studentId;
-	}
-	
-	
-	public String getStudentName() {
-		return name;
-	}
-	
-	
-	public void setStudentName(String studentName) {
-		name = studentName;
-	}
-	
-	
-	public String getStudentIntake() {
-		return intake;
-	}
-	
-	
-	public void setStudentIntake(String studentIntake) {
-		intake = studentIntake;
-	}
-	
-	
-	public String getStudentSection() {
-		return section;
-	}
-	
-	
-	public void setStudentSection(String studentSection) {
-		section = studentSection;
-	}
+
 }
