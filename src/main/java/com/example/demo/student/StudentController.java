@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,6 +33,11 @@ public class StudentController {
 		return studentService.save(student);
 	}
 
+	@PostMapping("/AddNodes")
+	public Nodes addNodes(@RequestBody Nodes nodes) {
+		return studentService.save(nodes);
+	}
+
 	@PostMapping("/AddStudents")
 	public List<Student> addStudents(@RequestBody List<Student> student) {
 		return studentService.saveAll(student);
@@ -40,6 +46,11 @@ public class StudentController {
 	@GetMapping("/FindStudents")
 	public List<Student> FindAllStudents() {
 		return studentService.findAll();
+	}
+
+	@GetMapping("/FindNodes")
+	public List<Nodes> FindAllNodes() {
+		return studentService.findAllNodes();
 	}
 
 	@GetMapping("/FindStudent/{id}")
@@ -53,7 +64,7 @@ public class StudentController {
 	}
 
 	@GetMapping("/FindAnwarCloudeNodes")
-	public String FindAnwarCloudeNodes()  {
+	public List<Nodes> FindAnwarCloudeNodes()  {
 		
 		return studentService.fetchAndSaveDataFromThirdPartyApi();
 		
@@ -82,6 +93,12 @@ public class StudentController {
 	@PutMapping("/UpdateStudent/{id}")
 	public Student UpdateStudent(@PathVariable int id, @RequestBody Student student) {
 		return studentService.update(id, student);
+	}
+
+	@GetMapping("third-party-api")
+	public Objects callThirdPartyApi(){
+		return studentService.callThirdPartyApi();
+
 	}
 
 }

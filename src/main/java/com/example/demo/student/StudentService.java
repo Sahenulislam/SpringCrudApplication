@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
 
 
@@ -13,6 +14,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -37,6 +40,10 @@ public class StudentService {
 	public Student save(Student student) {
 		return studentRepository.save(student);
 	}
+
+	public Nodes save(Nodes nodes) {
+		return nodesRepository.save(nodes);
+	}
 	
 	
 	public List<Student> saveAll(List<Student>student) {
@@ -48,6 +55,11 @@ public class StudentService {
 		
 		return studentRepository.findAll();
     }
+
+	public List<Nodes> findAllNodes(){
+
+		return nodesRepository.findAll();
+	}
 	
 	
 	public Student findById(int id) {
@@ -99,9 +111,26 @@ public class StudentService {
 	}
 
 
-	public String fetchAndSaveDataFromThirdPartyApi(){
+	public List<Nodes> fetchAndSaveDataFromThirdPartyApi() {
+		String uri = "http://172.17.17.14:8080/goapi/anwarcloud/nodes";
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<List<Object>> jsonResponse = restTemplate.exchange(uri,
+				HttpMethod.GET, null, new ParameterizedTypeReference<List<Object>>() {});
+
+//		ObjectMapper objectMapper = new ObjectMapper();
+			// Deserialize JSON array into a list of Nodes objects
+//			List<Nodes> nodesList = objectMapper.readValue(jsonResponse, new TypeReference<List<Nodes>>() {});
+
+			// Save the list of entities to the database
+//			nodesRepository.saveAll(jsonResponse.getBody());
+
+			return null;
+	}
+
+
+	/*public String fetchAndSaveDataFromThirdPartyApi(){
 		
-		String uri = "http://localhost:8080/FindStudent/1";
+		String uri = "http://172.17.17.14:8080/goapi/anwarcloud/nodes";
 		RestTemplate restTemplate = new RestTemplate();
 		String jsonResponse = restTemplate.getForObject(uri, String.class);
 
@@ -110,11 +139,29 @@ public class StudentService {
 	            Nodes myEntity = objectMapper.readValue(jsonResponse, Nodes.class);
 
 	            // Save the entity to the database
-	            nodesRepository.save(myEntity);
+	            nodesRepository.saveAll(myEntity);
 	        } catch (IOException e) {
 	            // Handle exception
-	            e.printStackTrace();
-	        }
+	            e.printStackTrace();	        }
+		return jsonResponse;
+	}*/
+
+
+	public Object callThirdPartyApi(){
+		String uri = "http://172.17.17.14:8080/goapi/anwarcloud/nodes";
+		RestTemplate restTemplate = new RestTemplate();
+		String jsonResponse = restTemplate.getForObject(uri, String.class);
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			Nodes myEntity = objectMapper.readValue(jsonResponse, Nodes.class);
+
+			// Save the entity to the database
+			nodesRepository.save(myEntity);
+		} catch (IOException e) {
+			// Handle exception
+			e.printStackTrace();
+		}
 		return jsonResponse;
 	}
 
