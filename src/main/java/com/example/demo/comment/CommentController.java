@@ -10,7 +10,6 @@ public class CommentController {
 
     @Autowired
     CommentService commentService;
-
     @GetMapping("third-party-api")
     public Object callThirdPartyApi(){
         return commentService.callThirdPartyApi();
