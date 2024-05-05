@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-import com.example.demo.student.objects.Student;
+//import com.example.demo.student.objects.Student;
 import org.springframework.data.domain.Page;
 
 
@@ -35,7 +35,11 @@ public class StudentService {
 
 
     public Student findById(Long id) {
-        return studentRepository.findById(id).orElse(null);
+        Optional<Student> student = studentRepository.findById(id);
+        if (student.isPresent())
+            return student.get();
+
+        return  null;
     }
 
 

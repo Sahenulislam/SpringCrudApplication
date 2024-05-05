@@ -2,13 +2,13 @@ package com.example.demo.student;
 
 import java.util.List;
 
-import com.example.demo.student.objects.Student;
+//import com.example.demo.student.objects.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("student")
+@RequestMapping("/student")
 public class StudentController {
 
     @Autowired
