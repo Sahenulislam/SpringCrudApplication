@@ -1,14 +1,12 @@
 package com.example.demo.student;
 
+import com.example.demo.laptop.Laptop;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.relational.core.mapping.Table;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,7 +22,11 @@ public class Student {
 	@Column(name = "section")
 	private String section;
 
+	@OneToMany(mappedBy="student", cascade = CascadeType.ALL)
+	private List<Laptop> laptop;
+
 	public Student() {
+
 	}
 
 	public Student(Long id, String name, String intake, String section) {

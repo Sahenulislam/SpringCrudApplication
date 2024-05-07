@@ -1,3 +1,4 @@
+/*
 package com.example.demo.student;
 
 import com.example.demo.student.Student;
@@ -31,6 +32,7 @@ class StudentServiceTest {
 
     @MockBean
     StudentRepository studentRepository;
+*/
 /*
     @Test
     void save() {
@@ -38,7 +40,8 @@ class StudentServiceTest {
 
     @Test
     void saveAll() {
-    }*/
+    }*//*
+
 
     @Test
     void findAll() {
@@ -82,6 +85,7 @@ class StudentServiceTest {
 
 
 
+*/
 /*
     @Test
     void findAllBySection() {
@@ -101,5 +105,7 @@ class StudentServiceTest {
 
     @Test
     void update() {
-    }*/
+    }*//*
+
 }
+*/

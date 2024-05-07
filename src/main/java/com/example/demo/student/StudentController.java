@@ -14,13 +14,13 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
-    @PostMapping("/add-student")
+    @PostMapping("/save")
     public Student addStudent(@RequestBody Student student) {
         return studentService.save(student);
     }
 
 
-    @PostMapping("/add-all-student")
+    @PostMapping("/save-all-student")
     public List<Student> addStudents(@RequestBody List<Student> student) {
         return studentService.saveAll(student);
     }
@@ -51,7 +51,7 @@ public class StudentController {
 
     }
 
-    @DeleteMapping("/delete-student/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteStudent(@PathVariable Long id) {
         studentService.deleteById(id);
         return "product removed || " + id;
