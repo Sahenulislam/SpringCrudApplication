@@ -51,6 +51,16 @@ public class StudentController {
 
     }
 
+    @GetMapping("find-all-laptop-by-user/{id}")
+    public   List<StudentLaptopProjection> findAllLaptopByStudentId(@PathVariable Long id){
+        return studentService.findAllLaptopByStudentId(id);
+    }
+
+//    @GetMapping("find-all-laptop")
+//    public List<Laptop> findAllLaptop(@PathVariable Long id){
+//        return studentService.findAllLaptop(id);
+//    }
+
     @DeleteMapping("/delete/{id}")
     public String deleteStudent(@PathVariable Long id) {
         studentService.deleteById(id);

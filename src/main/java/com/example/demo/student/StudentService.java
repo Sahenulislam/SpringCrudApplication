@@ -42,6 +42,11 @@ public class StudentService {
         return  null;
     }
 
+    public  List<StudentLaptopProjection> findAllLaptopByStudentId(Long id){
+        List<StudentLaptopProjection> student = studentRepository.findAllLaptopByStudentId(id);
+       return student;
+    }
+
 
     public List<Student> findAllBySection(String Section) {
         return studentRepository.findAllBySection(Section);
@@ -55,6 +60,10 @@ public class StudentService {
         Pageable sortedByName = PageRequest.of(page, pagesize);
         return studentRepository.findAll(sortedByName);
     }
+
+    /*public List<Laptop> findAllLaptop(Long id){
+        return studentRepository.findById(id);
+    }*/
 
     public String deleteById(Long id) {
         studentRepository.deleteById(id);

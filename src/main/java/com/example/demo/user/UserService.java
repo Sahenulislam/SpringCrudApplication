@@ -1,13 +1,9 @@
 package com.example.demo.user;
-
-
 import com.example.demo.user.objects.ChangePassword;
 import com.example.demo.user.objects.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-
 
 @Service
 public class UserService {
@@ -34,14 +30,13 @@ public class UserService {
         }
         else {
 
-            // do Login;
+            //---> do Login;
         }
         return loginUser;
     }
-
-    public User changePassword(ChangePassword changePassword){
-        User currentUser=      //find currentUser;
-        return userRepository.save(currentUser.setPassword(passwordEncoder.encode(changePassword.getNewPassword())));
+    public void changePassword(ChangePassword changePassword){
+       // User currentUser=      //----> find currentUser;
+       // return userRepository.save(currentUser.setPassword(passwordEncoder.encode(changePassword.getNewPassword())));
     }
 }
 

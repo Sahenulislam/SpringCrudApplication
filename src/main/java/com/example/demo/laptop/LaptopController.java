@@ -17,7 +17,7 @@ public class LaptopController {
     LaptopService laptopService;
 
     @PostMapping("/save")
-    public Laptop save(@RequestBody Laptop laptop){
+    public LaptopDto save(@RequestBody LaptopDto laptop){
         return laptopService.save(laptop);
     }
 

@@ -15,24 +15,19 @@ public class UserController {
 
     @Autowired
     UserService userService;
-
-
+/*
 
     @PostMapping("/create-account")
     public User createAccount(@RequestBody User user){
 
         return userService.createAccount(user);
     }
+*/
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginUser loginUser){
 
-        return ResponseEntity.ok().body(userService.login(loginUser));
-    }
-
-    @PostMapping("/change-password")
+   /* @PostMapping("/change-password")
     public User changePassword(@RequestBody ChangePassword changePassword){
         return userService.changePassword(changePassword);
-    }
+    }*/
 
 }

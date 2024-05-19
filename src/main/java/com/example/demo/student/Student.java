@@ -1,6 +1,8 @@
 package com.example.demo.student;
 
 import com.example.demo.laptop.Laptop;
+import com.example.demo.laptop.LaptopDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
