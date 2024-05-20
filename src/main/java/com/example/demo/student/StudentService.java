@@ -1,5 +1,6 @@
 package com.example.demo.student;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,31 +21,53 @@ public class StudentService {
     StudentRepository studentRepository;
 
 
-    public Student save(Student student) {
-        return studentRepository.save(student);
+    // Save single object;
+    public StudentDto save(StudentDto studentDto) {
+        Student student=new Student(studentDto);
+        studentRepository.save(student);
+        studentDto.setId(student.getId());
+        return studentDto;
     }
 
-    public List<Student> saveAll(List<Student> student) {
-        return studentRepository.saveAll(student);
+    // Save multiple object;
+    public List<StudentDto> saveAll(List<StudentDto> pStudentDto) {
+        List<Student>student=new ArrayList<Student>();
+        for(StudentDto studentDto:pStudentDto){
+            Student _student= new Student(studentDto);
+            student.add(_student);
+        }
+        studentRepository.saveAll(student);
+        return pStudentDto;
     }
 
-
-    public List<Student> findAll() {
-        return studentRepository.findAll();
+    // Find multiple object;
+    public List<StudentDto> findAll() {
+        List<Student>student=studentRepository.findAll();
+        List<StudentDto>studentDto=new ArrayList<StudentDto>();
+        for(Student _student:student){
+            StudentDto _studentdto= new StudentDto(_student);
+            studentDto.add(_studentdto);
+        }
+        return studentDto;
     }
 
-
-    public Student findById(Long id) {
-        Optional<Student> student = studentRepository.findById(id);
-        if (student.isPresent())
-            return student.get();
-
-        return  null;
+    //Find single object;
+    public StudentDto findById(Long id) {
+        Student student = studentRepository.findById(id).orElse(null);
+        if (student==null)
+            return null;
+        StudentDto studentDto=new StudentDto(student);
+        return studentDto;
     }
 
-    public  List<StudentLaptopProjection> findAllLaptopByStudentId(Long id){
-        List<StudentLaptopProjection> student = studentRepository.findAllLaptopByStudentId(id);
+    public  List<StudentLaptopProjection> findAllLaptopByUser(Long id){
+        List<StudentLaptopProjection> student = studentRepository.findAllLaptopByUser(id);
        return student;
+    }
+
+    public  List<StudentLaptopProjection> findAllLaptopByAllUser(){
+        List<StudentLaptopProjection> student = studentRepository.findAllLaptopByAllUser();
+        return student;
     }
 
 
@@ -56,8 +79,8 @@ public class StudentService {
         return studentRepository.findAllBySection(section, PageRequest.of(page, pagesize));
     }
 
-    public Page<Student> findAll(int page, int pagesize) {
-        Pageable sortedByName = PageRequest.of(page, pagesize);
+    public Page<Student> findAll(int page, int pageSize) {
+        Pageable sortedByName = PageRequest.of(page, pageSize);
         return studentRepository.findAll(sortedByName);
     }
 

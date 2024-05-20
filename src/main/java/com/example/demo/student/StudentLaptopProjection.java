@@ -3,8 +3,8 @@ package com.example.demo.student;
 public interface StudentLaptopProjection {
     Long getStudentId();
     String getStudentName();
-    String getStudentIntake();
-    String getStudentSection();
+    String getIntake();
+    String getSection();
     String getLaptopId();
     String getLaptopCompany();
 }

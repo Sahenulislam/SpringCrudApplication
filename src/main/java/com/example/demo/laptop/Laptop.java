@@ -23,7 +23,7 @@ public class Laptop extends LaptopDto {
 
     @ManyToOne
     @JoinColumn(name = "student_id")
-    @JsonIgnore
+
     private Student student;
     Laptop(){}
     Laptop(LaptopDto laptopDto){

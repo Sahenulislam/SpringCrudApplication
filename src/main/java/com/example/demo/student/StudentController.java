@@ -15,35 +15,35 @@ public class StudentController {
     StudentService studentService;
 
     @PostMapping("/save")
-    public Student addStudent(@RequestBody Student student) {
+    public StudentDto addStudent(@RequestBody StudentDto student) {
         return studentService.save(student);
     }
 
 
-    @PostMapping("/save-all-student")
-    public List<Student> addStudents(@RequestBody List<Student> student) {
+    @PostMapping("/save-all")
+    public List<StudentDto> addStudents(@RequestBody List<StudentDto> student) {
         return studentService.saveAll(student);
     }
 
-    @GetMapping("/find-all-student")
-    public List<Student> findAllStudent() {
+    @GetMapping("/find-all")
+    public List<StudentDto> findAllStudent() {
         return studentService.findAll();
     }
 
-    @GetMapping("/find-student/{id}")
-    public Student findStudentById(@PathVariable Long id) {
+    @GetMapping("/find/{id}")
+    public StudentDto findStudentById(@PathVariable Long id) {
         return studentService.findById(id);
     }
 
-    @GetMapping("/find-all-student/{page}/{pageSize}")
-    public Page<Student> findAllStudent(@PathVariable int page, @PathVariable int pageSize) {
+    /*@GetMapping("/find-all-student/{page}/{pageSize}")
+    public Page<StudentDto> findAllStudent(@PathVariable int page, @PathVariable int pageSize) {
         return studentService.findAll(page, pageSize);
-    }
+    }*/
 
-    @GetMapping("/find-all-student-by-section/{Section}")
-    public List<Student> findAllStudentBySection(@PathVariable String Section) {
+   /* @GetMapping("/find-all-student-by-section/{Section}")
+    public List<StudentDto> findAllStudentBySection(@PathVariable String Section) {
         return studentService.findAllBySection(Section);
-    }
+    }*/
 
     @GetMapping("/find-all-student-by-section/{section}/{page}/{pageSize}")
     public Page<Student> findAllStudentBySection(@PathVariable String section, @PathVariable int page, @PathVariable int pageSize) {
@@ -52,8 +52,12 @@ public class StudentController {
     }
 
     @GetMapping("find-all-laptop-by-user/{id}")
-    public   List<StudentLaptopProjection> findAllLaptopByStudentId(@PathVariable Long id){
-        return studentService.findAllLaptopByStudentId(id);
+    public   List<StudentLaptopProjection> findAllLaptopByUser(@PathVariable Long id){
+        return studentService.findAllLaptopByUser(id);
+    }
+    @GetMapping("find-all-laptop-by-all-user")
+    public   List<StudentLaptopProjection> findAllLaptopByAllUser(){
+        return studentService.findAllLaptopByAllUser();
     }
 
 //    @GetMapping("find-all-laptop")
